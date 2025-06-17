@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smile Animation</title>
+    <script src="./assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="./assets/styles.css">
+  </head>
+  <body>
+    <div id="header">
+      <div class="title" id="text-serious">
+        <span>S</span><span>E</span><span>R</span><span>I</span><span>O</span><span>U</span><span>S</span>
+      </div>
+      <svg
+        class="smile"
+        id="smile"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 200 200"
+        width="200"
+        height="200"
+      >
+        <circle
+          cx="100"
+          cy="100"
+          r="92"
+          fill="transparent"
+          stroke="#1e1e1e"
+          stroke-width="16"
+        />
+        <circle cx="70" cy="80" r="14" fill="#1e1e1e" />
+        <circle cx="130" cy="80" r="14" fill="#1e1e1e" />
+        <path
+          d="M60,120 Q100,160 140,120"
+          fill="none"
+          stroke="#1e1e1e"
+          stroke-width="16"
+          stroke-linecap="round"
+        />
+      </svg>
+      <div class="title" id="text-business">
+        <span>B</span><span>U</span><span>S</span><span>I</span><span>N</span><span>E</span><span>S</span><span>S</span>
+      </div>
+    </div>
+    <div id="sub_header">
+      <p class="sub-title" id="sub_1">Branding and Digital Design</p>
+      <p class="sub-title" id="sub_2">Agency for Startups & Scaleups</p>
+    </div>
+    <div id="main"></div>
+
+    <!-- //<div style="display: flex; position: absolute; right: 20px; bottom: 20px; flex-direction: column;">
+      //<p style="font-size: larger;">Telegram : @sonex_digital</p>
+      //<p style="font-size: larger;">Discord : oli001542</p>
+      //<p style="font-size: larger;">Version : 1.1 (12/8)</p>
+    //</div> -->
+
+    <script src="./assets/three.min.js"></script>
+    <script src="./assets/GLTFLoader.js"></script>
+    <script src="./assets/scripts.js"></script>
+
+    <script>
+      window.onload = function () {
+        const seriousText = document.getElementById("text-serious");
+        const businessText = document.getElementById("text-business");
+        const sub_1 = document.getElementById("sub_1");
+        const sub_2 = document.getElementById("sub_2");
+        const smile = document.getElementById("smile");
+        const main = document.getElementById("main");
+
+        gsap.set(seriousText, { left: "2vw", top: "50vh" });
+        gsap.set(businessText, { right: "2vw", top: "50vh" });
+        gsap.set(smile, { left: "2vw", top: "44vh", opacity: 1 });
+        gsap.set(sub_1, {top: "22vh"});
+        gsap.set(sub_2, {top: "32vh"});
+
+        gsap.to(smile, {
+          duration: 1.4,
+          x: "60vw",
+          rotation: 900, // Rotate smile as it moves
+          ease: "power2.out",
+          delay: 0.3,
+        });
+
+        gsap.to(seriousText, {
+          duration: 0.8,
+          opacity: 1, // Fade in the serious text
+          delay: 0.4, // Delay before it starts animating
+          onStart: () => {
+            gsap.to(seriousText.children, {
+              duration: 0.6,
+              y: -60,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          },
+          onComplete: () => {
+            gsap.to(seriousText.children, {
+              duration: 0.1,
+              y: -50,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+
+            gsap.to(smile, {
+              duration: 1,
+              x: "42vw",
+              rotation: 360, // Continue rotating as it moves
+              ease: "power2.in",
+            });
+
+            gsap.to(businessText, {
+              duration: 1,
+              opacity: 1, // Fade in the business text
+              delay: 0.2,
+              onStart: () => {
+                gsap.to(businessText.children, {
+                  duration: 0.5,
+                  y: -60,
+                  stagger: -0.1,
+                  ease: "power2.out",
+                });
+              },
+              onComplete: () => {
+                gsap.to(businessText.children, {
+                  duration: 0.1,
+                  y: -50,
+                  stagger: -0.1,
+                  ease: "power2.out",
+                });
+
+                gsap.to(seriousText, {
+                  duration: 1,
+                  left: "3.5vw",
+                  y: "-40vh",
+                  ease: "power2.in",
+                  delay: 1,
+                  scale: 1.15,
+                });
+
+                gsap.to(businessText, {
+                  duration: 1,
+                  right: "3.5vw",
+                  y: "-40vh",
+                  ease: "power2.in",
+                  delay: 1,
+                  scale: 1.15,
+                });
+
+                gsap.to(smile, {
+                  duration: 1,
+                  left: '2vw',
+                  y: '-35vh',
+                  scale: 0.3,
+                  ease: 'power2.in',
+                  delay: 1
+                });
+
+                gsap.to(smile.querySelectorAll('circle, path'), {
+                  duration: 1,
+                  stroke: 'black',
+                  fill: 'black',
+                  ease: 'power2.in',
+                  delay: 1
+                });
+
+                gsap.to(sub_1, {
+                  duration: 0.5,
+                  opacity: 1,
+                  top: "20vh",
+                  ease: "power2.out",
+                  delay: 1.5,
+                });
+
+                gsap.to(sub_2, {
+                  duration: 0.5,
+                  opacity: 1,
+                  top: "30vh",
+                  ease: "power2.out",
+                  delay: 1.5,
+                });
+
+                gsap.to(main, {
+                  duration: 0.5,
+                  opacity: 1,
+                  ease: "power1.inOut",
+                  delay: 1.5,
+                });
+              },
+            });
+          },
+        });
+      };
+    </script>
+  </body>
+</html>
